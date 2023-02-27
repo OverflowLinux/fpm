@@ -1,0 +1,36 @@
+#!/bin/sh
+
+do_install(){
+    . $1
+    cp $1 $2/etc/flow/$NAME
+    install_package $2
+}
+do_remove(){
+    . $2/etc/flow/$1
+    remove_package $2
+    rm $2/etc/flow/$NAME
+}
+do_help(){
+    echo "flow install <package> <root> TO INSTALL PACKAGE"
+    echo "flow remove <package> <root> TO REMOVE PACKAGE"
+    echo "flow help TO PRINT THIS HELP MESSAGE"
+}
+if [ $UID -ne 0 ];then
+    echo "Flow Package Manager Only Run In Root Account."
+    exit 0
+fi
+if [ -n "$1" ];then
+    if [ "$1" = "install" ];then
+        do_install $2 $3
+        exit 0
+    fi
+    if [ "$1" = "remove" ];then
+        do_remove $2 $3
+        exit 0
+    fi
+    if [ "$1" = "help" ];then
+        do_help
+        exit 0
+    fi
+    echo "Args are illegal."
+fi

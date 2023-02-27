@@ -1,0 +1,9 @@
+#!/bin/sh
+
+NAME="Example"
+install_package(){
+    echo install to $1
+}
+remove_package(){
+    echo remove from $1
+}
