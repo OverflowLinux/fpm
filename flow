@@ -1,6 +1,11 @@
 #!/bin/sh
 
 do_install(){
+    if [ ! -d $2/etc/flow/ ];then
+        mkdir $2/etc/flow/
+        echo "Creating $2/etc/flow"
+    fi
+    echo "Installing $1"
     . $1
     cp $1 $2/etc/flow/$NAME
     install_package $2/
