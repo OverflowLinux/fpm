@@ -3,16 +3,18 @@
 do_install(){
     . $1
     cp $1 $2/etc/flow/$NAME
-    install_package $2
+    install_package $2/
 }
 do_remove(){
-    . $2/etc/flow/$1
-    remove_package $2
-    rm $2/etc/flow/$NAME
+    if [ -e $2/etc/flow/$1 ];then
+        . $2/etc/flow/$1
+        remove_package $2/
+        rm $2/etc/flow/$NAME
+    fi
 }
 do_help(){
-    echo "flow install <package> <root> TO INSTALL PACKAGE"
-    echo "flow remove <package> <root> TO REMOVE PACKAGE"
+    echo "flow install <package> [root] TO INSTALL PACKAGE"
+    echo "flow remove <package> [root] TO REMOVE PACKAGE"
     echo "flow help TO PRINT THIS HELP MESSAGE"
 }
 if [ $UID -ne 0 ];then
