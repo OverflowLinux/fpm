@@ -2,7 +2,7 @@
 
 do_install(){
     if [ ! -d $2/etc/flow/ ];then
-        mkdir -r $2/etc/flow/
+        mkdir -p $2/etc/flow/
         echo "Creating $2/etc/flow"
     fi
     echo "Installing $1"
